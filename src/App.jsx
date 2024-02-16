@@ -4,10 +4,10 @@ import {
   MainContainer,
   ChatContainer,
   MessageList,
-  Message,
   MessageInput,
   TypingIndicator,
 } from "@chatscope/chat-ui-kit-react";
+import Markdown from "react-markdown";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 
@@ -49,7 +49,7 @@ const App = () => {
     });
 
     const apiRequestBody = {
-      model: "gpt-3.5-turbo",
+      model: "gpt-4",
       messages: [
         { role: "system", content: "I'm a Student using ChatGPT for learning" },
         ...apiMessages,
@@ -70,7 +70,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <div style={{ position: "relative", height: "800px", width: "700px" }}>
+      <div style={{ position: "relative", maxWidth: "800px", width: "100%" }}>
         <MainContainer>
           <ChatContainer>
             <MessageList
@@ -82,8 +82,13 @@ const App = () => {
               }
             >
               {messages.map((message, i) => {
-                console.log(message);
-                return <Message key={i} model={message} />;
+                return (
+                  <div key={i} className={`message ${message.sender}`}>
+                    {message.message.split("\n").map((part, i) => (
+                      <Markdown key={i}>{part}</Markdown>
+                    ))}
+                  </div>
+                );
               })}
             </MessageList>
             <MessageInput

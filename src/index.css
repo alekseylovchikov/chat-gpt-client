@@ -16,3 +16,26 @@ body,
   height: 100vh;
   background-color: #323232;
 }
+
+.message {
+  padding: 16px;
+  border: 1px solid #323232;
+  border-radius: 3px;
+  font-family: sans-serif;
+}
+
+.message:not(:last-child) {
+  margin-bottom: 16px;
+}
+
+.user {
+  background-color: #363fb3;
+  text-align: right;
+  color: white;
+}
+
+.ChatGPT {
+  background-color: #313131;
+  text-align: left;
+  color: white;
+}
